@@ -10,12 +10,12 @@ import com.example.vertical.logistica.core.mapper.OrderMapper;
 import com.example.vertical.logistica.core.adapters.repository.OrderRepository;
 import com.example.vertical.logistica.core.usecase.UserService;
 import jakarta.transaction.Transactional;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 
-@Component
+@Service
 public class OrderServiceImpl implements OrderService {
     private final UserService userService;
     private final OrderRepository orderRepository;
