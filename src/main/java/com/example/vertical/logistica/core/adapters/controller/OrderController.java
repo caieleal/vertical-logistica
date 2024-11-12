@@ -3,6 +3,7 @@ package com.example.vertical.logistica.core.adapters.controller;
 import com.example.vertical.logistica.core.adapters.controller.response.VerticalLogResponse;
 import com.example.vertical.logistica.core.usecase.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -55,6 +56,8 @@ public class OrderController {
                             schema = @Schema(implementation = VerticalLogResponse.class))),
             @ApiResponse(responseCode = "400", description = "Parâmetros de data inválidos")
     })
+    @Parameter(description = "Data de início no formato yyyy-MM-dd", example = "2023-01-01")
+    @Parameter(description = "Data de fim no formato yyyy-MM-dd", example = "2024-01-07")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/filter/{startDate}/{endDate}")
     public ResponseEntity<List<VerticalLogResponse>> filterByDate(

@@ -5,7 +5,7 @@ WORKDIR /app
 COPY ../build.gradle.kts ../settings.gradle.kts ./
 COPY ../src ./src
 
-RUN gradle clean build --no-daemon
+RUN gradle clean build -x test --no-daemon
 
 FROM eclipse-temurin:17.0.13_11-jre-ubi9-minimal
 

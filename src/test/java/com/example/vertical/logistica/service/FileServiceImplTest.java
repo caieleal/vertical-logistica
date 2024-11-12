@@ -7,11 +7,9 @@ import com.example.vertical.logistica.core.domain.model.FileInputData;
 import com.example.vertical.logistica.core.service.FileServiceImpl;
 import com.example.vertical.logistica.core.usecase.OrderService;
 import com.example.vertical.logistica.core.utils.FileBuilder;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 

@@ -3,6 +3,7 @@ package com.example.vertical.logistica.core.adapters.controller.response;
 import com.example.vertical.logistica.core.adapters.controller.dto.OrderDTO;
 import com.example.vertical.logistica.core.adapters.controller.dto.ProductDTO;
 import com.example.vertical.logistica.core.adapters.controller.dto.UserDTO;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +20,9 @@ import java.util.stream.Collectors;
 @Data
 @Builder
 public class VerticalLogResponse {
+    @Schema(example = "50")
     private Long userId;
+    @Schema(example = "Dr. Jonathon Cummerata")
     private String name;
     private List<Order> orders;
 
@@ -28,8 +31,12 @@ public class VerticalLogResponse {
     @Data
     @Builder
     public static class Order{
+        @Schema(example = "1")
         private Long orderId;
+
+        @Schema(example = "150")
         private BigDecimal total;
+        @Schema(example = "2021-11-22")
         private LocalDate date;
         private List<Product> products;
 
@@ -51,7 +58,9 @@ public class VerticalLogResponse {
     @Data
     @Builder
     public static class Product {
+        @Schema(example = "1")
         private Long productId;
+        @Schema(example = "150")
         private BigDecimal value;
 
         public static Product fromDto(ProductDTO product) {

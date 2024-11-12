@@ -1,86 +1,85 @@
-# vertical-logistica
+# Vertical-Logistica
 
-Esta aplicação é uma API REST para gerenciamento de operações logísticas. Utiliza uma arquitetura modular e aplica os princípios SOLID para manter o código simples, legível e escalável.
+### Documentação de Referência
+Esta aplicação utiliza diversas bibliotecas e frameworks para implementar suas funcionalidades. Consulte a documentação abaixo para entender cada uma das dependências utilizadas:
 
-Arquitetura e Design
-Tecnologias Utilizadas
-Java 17: Linguagem principal para a implementação da API.
-Spring Framework: Para configuração da aplicação, gerenciamento de dependências, controle de injeção e simplificação do desenvolvimento com Spring Boot.
-PostgreSQL: Banco de dados relacional utilizado para persistência dos dados.
-Swagger com Springdoc OpenAPI: Para documentação interativa da API, facilitando a visualização e teste dos endpoints.
-Decisões Arquiteturais
-O projeto segue uma arquitetura hexagonal com foco na separação de responsabilidades e aplicação dos princípios SOLID. Com essa abordagem, mantemos um código modular, onde a lógica de negócio é independente de detalhes de infraestrutura, como persistência de dados e protocolos de comunicação.
+* [Official Gradle documentation](https://docs.gradle.org)
+* [Spring Boot Gradle Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.6.1/gradle-plugin/reference/htmlsingle/)
+* [Spring Boot Starter Batch](https://docs.spring.io/spring-batch/reference/)
+* [Create an OCI image](https://docs.spring.io/spring-boot/docs/2.6.1/gradle-plugin/reference/htmlsingle/#build-image)
+* [Spring Data JPA](https://docs.spring.io/spring-boot/docs/2.6.1/reference/htmlsingle/#data.sql.jpa-and-spring-data)
+* [SpringDoc OpenAPI Starter WebMVC UI](https://springdoc.org/)
+* [Flyway Migration](https://docs.spring.io/spring-boot/docs/2.6.1/reference/htmlsingle/#howto.data-initialization.migration-tool.flyway)
+* [Project Lombok](https://projectlombok.org/)
+* [PostgreSQL](https://jdbc.postgresql.org/)
 
-Estrutura de Pacotes
-Abaixo estão as descrições de cada pacote e sua função na aplicação:
 
-adapters: Camada responsável por adaptar a aplicação para ambientes externos.
+### Testes
 
-controller: Contém os controllers da API, responsáveis por receber as requisições HTTP e retornar respostas. Segue o princípio da responsabilidade única, onde cada controller é responsável por um conjunto específico de endpoints.
-dto: Define os Data Transfer Objects, que são usados para transferir dados entre camadas da aplicação.
-response: Contém as classes de resposta para os endpoints da API, garantindo que a interface de saída esteja desacoplada da lógica interna.
-repository: Define interfaces para o acesso a dados, seguindo o padrão de repositório para desacoplar a camada de persistência.
-domain: Representa a camada de domínio, onde estão os elementos essenciais da lógica de negócios.
+* [Spring Boot Starter Test](https://docs.spring.io/spring-boot/reference/testing/index.html#testing)
+* [Spring Batch Test](https://docs.spring.io/spring-batch/reference/)
+* [JUnit Platform Launcher](https://junit.org/junit5/docs/current/user-guide/)
 
-entities: Contém as entidades de domínio que representam as tabelas do banco de dados e os dados de negócio da aplicação.
-model: Inclui objetos de valor ou outros modelos que representam abstrações da lógica de negócios.
-factory: Padrão de fábrica para criação de objetos complexos, centralizando a construção de instâncias e mantendo o código organizado.
+### Guides
 
-mapper: Utiliza o padrão de mapeamento para converter objetos de domínio em DTOs e vice-versa, promovendo a separação entre camadas.
+* [Acessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa)
+* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service)
+* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content)
+* [Building REST services with Spring](https://spring.io/guides/tutorials/rest)
+* [Documenting APIs with SpringDoc and OpenAPI](https://springdoc.org/)
 
-service: Contém as implementações dos serviços principais de negócio, aplicando regras e lógica específica.
+### Instruções
 
-usecase: Camada responsável pelos casos de uso. Define a lógica de negócio específica para cada cenário, desacoplada de infraestrutura e interfaces externas.
+### Pré-requisitos
+- JDK 17
+- Docker-compose
+- [IntelliJ](https://www.jetbrains.com/idea/), Eclipse ou IDE com plugin para o Gradle
 
-utils: Contém utilitários e classes de apoio, como validadores e métodos auxiliares.
+### Passos para Executar a Aplicação
 
-Princípios SOLID
-O projeto adota os princípios SOLID para garantir modularidade e manutenção fácil:
+* Importe o projeto na IDE como projeto gradle
 
-Responsabilidade Única (SRP): Cada classe tem uma responsabilidade única, como mapeamento (Mapper), controle (Controller) e serviços de negócios (Service).
-Aberto-Fechado (OCP): A estrutura de pacotes permite fácil extensão sem modificação nas classes existentes.
-Substituição de Liskov (LSP): Todas as interfaces e abstrações são implementadas de forma que podem ser substituídas por subclasses sem comprometer a funcionalidade.
-Segregação de Interface (ISP): Interfaces são definidas de forma granular, especialmente na camada de repositório.
-Inversão de Dependência (DIP): As dependências de infraestrutura (por exemplo, banco de dados) são injetadas nas classes de serviço e repositórios, usando o Spring para injeção de dependência.
-Execução da Aplicação
-A aplicação está pronta para execução via Docker e utiliza dois contêineres Docker para a API e o banco de dados PostgreSQL.
+```
+    # Navegue até a raiz do projeto
+    docker-compose up
+    
+    Ou
+    
+    Docker-compose up -d
+```
+* Acessar a Documentação Swagger:
+- Depois que a aplicação estiver em execução, acesse a documentação do Swagger para testar a API.
+- Abra o navegador:
+```
+    # Acesse a url:
+    http://localhost:8080/swagger-ui.html
 
-Pré-requisitos
-Docker: Certifique-se de que o Docker está instalado para execução dos contêineres.
-Arquivos Docker
-Dockerfile: Configura o ambiente e constrói a imagem da aplicação.
-docker-compose.yml: Configura o banco de dados e a aplicação para rodarem em contêineres separados, conectados pela mesma rede Docker.
-Instruções para Execução
-Construir e Executar a Aplicação
+```
 
-A partir da raiz do projeto, execute os seguintes comandos para iniciar o ambiente:
+### Arquitetura
 
-bash
-Copiar código
-docker-compose up --build
-Esse comando irá:
+A aplicação foi desenvolvida utilizando o padrão Clean Architecture, criado por Robert C. Martin (Uncle Bob). A Clean Architecture organiza o código em camadas que se concentram na separação de responsabilidades e no isolamento da lógica de negócio das dependências externas, proporcionando uma aplicação flexível e de fácil manutenção.
 
-Construir a imagem da aplicação Spring Boot.
-Iniciar um contêiner PostgreSQL.
-Conectar os contêineres na mesma rede para que a aplicação tenha acesso ao banco de dados.
-Acessar a API
+* Princípios da Clean Architecture
+* Independência da Camada de Domínio: O domínio da aplicação é independente de frameworks, facilitando a manutenção e a reutilização.
+* Camadas bem Definidas: O código é dividido em camadas específicas para domínio, aplicação, adaptadores e infraestrutura.
+* Ports e Adapters: A comunicação entre a camada de domínio e o mundo externo ocorre por meio de interfaces chamadas de Ports, e suas implementações são chamadas de Adapters.
+* Facilidade de Testes: Como o domínio é isolado, é possível testar a lógica de negócios sem a necessidade de interagir diretamente com a infraestrutura.
 
-A aplicação estará disponível em http://localhost:8080.
-Acesse a documentação Swagger para visualizar e testar os endpoints:
-bash
-Copiar código
-http://localhost:8080/swagger-ui.html
-Endpoints
-A API expõe diversos endpoints para gerenciamento de dados logísticos. Exemplos:
+# Estrutura de Camadas
+* Core (Domínio): Contém as regras de negócio, classes de entidades e interfaces principais.
+* Adapters: Implementa as interfaces do domínio para interagir com tecnologias externas, como controladores REST, repositórios e mapeamento de dados.
+* Application: Orquestra a lógica de negócios, conectando o domínio com os adaptadores.
+* Infraestrutura: Contém detalhes específicos de implementação, como configuração de banco de dados e integração.
 
-GET /filter/{startDate}/{endDate}: Filtra ordens por intervalo de datas.
-POST /upload: Endpoint para upload de arquivos.
-Cada endpoint está documentado no Swagger, com exemplos e descrições detalhadas.
 
-Banco de Dados
-A aplicação utiliza o PostgreSQL para armazenamento dos dados. O Docker Compose está configurado para criar um banco de dados chamado verticallogisticadb e usa as credenciais padrão definidas no docker-compose.yml.
 
-Documentação e Testes
-Swagger: Toda a documentação da API está disponível pelo Swagger.
-Testes: Os testes foram desenvolvidos para garantir que cada funcionalidade chave esteja funcionando corretamente, com cobertura para serviços e repositórios.
+### Princípios SOLID
+A aplicação também adota os princípios SOLID, que ajudam a manter o código organizado, flexível e de fácil manutenção:
+
+- Single Responsibility Principle (SRP): Cada classe tem uma única responsabilidade, o que torna o código mais modular e reduz a complexidade.
+- Open/Closed Principle (OCP): As classes são abertas para extensão, mas fechadas para modificação, permitindo adicionar novas funcionalidades sem alterar o código existente.
+- Liskov Substitution Principle (LSP): Subtipos podem substituir seus tipos base sem alterar a funcionalidade do programa.
+- Interface Segregation Principle (ISP): Interfaces são específicas e focadas em uma responsabilidade, evitando classes que implementam métodos que não utilizam.
+- Dependency Inversion Principle (DIP): O código depende de abstrações e não de implementações concretas, facilitando a testabilidade e a troca de dependências.
 
