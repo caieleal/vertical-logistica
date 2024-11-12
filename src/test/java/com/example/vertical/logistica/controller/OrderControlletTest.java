@@ -8,8 +8,6 @@ import com.example.vertical.logistica.core.usecase.OrderService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -67,11 +65,10 @@ public class OrderControlletTest extends BaseControllerTest {
 
     @Test
     public void testFilterByDates() throws Exception {
-        Pageable pageable = PageRequest.of(0, 10);
         LocalDate startDate = LocalDate.of(2021, 3, 4);
         LocalDate endDate = LocalDate.of(2024, 3, 7);
 
-        when(orderService.findByDates(startDate, endDate, pageable)).thenReturn(mockOrder());
+        when(orderService.findByDates(startDate, endDate)).thenReturn(mockOrder());
         mockMvc.perform(MockMvcRequestBuilders.get(URL.concat("/filter/{startDate}/{endDate}"), startDate, endDate)
                         .param("page", "0")
                         .param("size", "10")

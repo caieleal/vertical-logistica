@@ -10,12 +10,6 @@ java {
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
 
-//java {
-//	toolchain {
-//		languageVersion = JavaLanguageVersion.of(17)
-//	}
-//}
-
 configurations {
 	compileOnly {
 		extendsFrom(configurations.annotationProcessor.get())
@@ -33,6 +27,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.flywaydb:flyway-core:9.4.0")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
 	compileOnly("org.projectlombok:lombok")
 	runtimeOnly("org.postgresql:postgresql")
 	annotationProcessor("org.projectlombok:lombok")

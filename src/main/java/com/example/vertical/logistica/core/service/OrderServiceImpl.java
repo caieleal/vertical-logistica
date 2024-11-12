@@ -10,7 +10,6 @@ import com.example.vertical.logistica.core.mapper.OrderMapper;
 import com.example.vertical.logistica.core.adapters.repository.OrderRepository;
 import com.example.vertical.logistica.core.usecase.UserService;
 import jakarta.transaction.Transactional;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -45,8 +44,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDTO> findByDates(LocalDate startDate, LocalDate endDate, Pageable pageable) {
-        return orderRepository.findAllByDateBetween(startDate, endDate, pageable).stream().map(OrderMapper::toDTO).toList();
+    public List<OrderDTO> findByDates(LocalDate startDate, LocalDate endDate) {
+        return orderRepository.findAllByDateBetween(startDate, endDate).stream().map(OrderMapper::toDTO).toList();
     }
 
     @Override

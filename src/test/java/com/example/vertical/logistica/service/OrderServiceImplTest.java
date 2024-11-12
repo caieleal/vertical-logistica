@@ -9,14 +9,11 @@ import com.example.vertical.logistica.core.domain.entities.UserEntity;
 import com.example.vertical.logistica.core.domain.model.Order;
 import com.example.vertical.logistica.core.domain.model.Product;
 import com.example.vertical.logistica.core.domain.model.User;
-import com.example.vertical.logistica.core.mapper.OrderMapper;
 import com.example.vertical.logistica.core.service.OrderServiceImpl;
 import com.example.vertical.logistica.core.usecase.UserService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -34,9 +31,6 @@ public class OrderServiceImplTest extends BaseServiceTest{
 
     @Mock
     private OrderRepository orderRepository;
-
-    @Mock
-    private OrderMapper orderMapper;
 
     @InjectMocks
     private OrderServiceImpl orderService;
@@ -86,10 +80,9 @@ public class OrderServiceImplTest extends BaseServiceTest{
     public void testFindByDates() {
         LocalDate startDate = LocalDate.of(2023, 1, 1);
         LocalDate endDate = LocalDate.of(2023, 12, 31);
-        Pageable pageable = PageRequest.of(0, 10);
 
-        when(orderRepository.findAllByDateBetween(eq(startDate), eq(endDate), eq(pageable))).thenReturn(mockOrderEntity());
-        List<OrderDTO> result = orderService.findByDates(startDate, endDate, pageable);
+        when(orderRepository.findAllByDateBetween(eq(startDate), eq(endDate))).thenReturn(mockOrderEntity());
+        List<OrderDTO> result = orderService.findByDates(startDate, endDate);
 
         assertEquals(1, result.size());
         OrderDTO order = result.get(0);
@@ -104,7 +97,7 @@ public class OrderServiceImplTest extends BaseServiceTest{
         assertEquals(2L, product.getProductId());
         assertEquals(new BigDecimal("152.30"), product.getValue());
 
-        verify(orderRepository, times(1)).findAllByDateBetween(startDate, endDate, pageable);
+        verify(orderRepository, times(1)).findAllByDateBetween(startDate, endDate);
     }
     @Test
     public void testListAll() {
